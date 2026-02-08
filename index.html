@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts and sparkles */
+        .floating {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+
+        .heart {
+            color: #ff69b4;
+        }
+
+        .sparkle {
+            color: #ffd700;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #d63384;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        #yes {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            transform: scale(1);
+        }
+
+        #yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        #no {
+            background: linear-gradient(45deg, #a8e6cf, #dcedc8);
+            color: #333;
+            position: relative;
+        }
+
+        /* Hide the no button initially, but it will move */
+        #no:hover {
+            /* JS will handle movement */
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating decorations -->
+    <div class="floating heart" style="top: 10%; left: 10%;">❤️</div>
+    <div class="floating sparkle" style="top: 20%; right: 15%;">✨</div>
+    <div class="floating heart" style="top: 50%; left: 20%;">💖</div>
+    <div class="floating sparkle" style="top: 70%; right: 10%;">⭐</div>
+    <div class="floating heart" style="top: 30%; right: 20%;">💕</div>
+    <div class="floating sparkle" style="top: 80%; left: 15%;">✨</div>
+
+    <div class="container">
+        <h1>Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button id="yes">YES</button>
+            <button id="no">NO</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+
+        // Function to move the NO button randomly
+        function moveNoButton() {
+            const maxX = window.innerWidth - noButton.offsetWidth;
+            const maxY = window.innerHeight - noButton.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            noButton.style.position = 'absolute';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        }
+
+        // Move on hover
+        noButton.addEventListener('mouseover', moveNoButton);
+
+        // Also move on click to make it even harder
+        noButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default click
+            moveNoButton();
+        });
+
+        // YES button action (optional: alert or something fun)
+        yesButton.addEventListener('click', () => {
+            alert('Yay! ❤️ You said YES! Happy Valentine\'s Day!');
+        });
+    </script>
+</body>
+</html>
